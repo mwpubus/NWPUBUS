@@ -17,7 +17,7 @@
 					<img src="photos/aheadFix.png" class="img-responsive" alt="Cinque Terre" width="1000" height="200"/>
 				</div>
 				<div class="col-md-2 column">
-					 <button type="button" class="btn btn-default">中文/English</button>
+					 <button type="button" class="btn btn-primary btn-block">中文/English</button>
 				</div>
 			</div>
 		</div>
@@ -73,35 +73,75 @@
 					</div>
 				</div>
 				<div class="col-md-4 column">
-					<form class="form-horizontal" role="form">
+				<%
+					String userid = "";
+						String passwd = "";
+						String s;
+						
+							Cookie[] cookies = request.getCookies();
+							if(cookies != null) {
+							for (Cookie cookie : cookies) {
+								s = cookie.getName(); //通过getName方法获得cookie的名称
+								if (s.equals("userid")) {
+									if (cookie.getValue() != null) {
+										userid = cookie.getValue(); //通过getValue方法获得cookie的值
+									}
+								} else if (s.equals("password")) {
+									if (cookie.getValue() != null) {
+										passwd = cookie.getValue();
+									}
+								}
+							}
+						}
+					
+				%>
+					<form class="form-horizontal" role="form" action="LoginServlet" method="post">
 						<div class="form-group">
-							 <label for="inputEmail3" class="col-sm-3 control-label">邮箱</label>
-							<div class="col-sm-9">
-								<input class="form-control" id="inputEmail3" type="email" />
+							 <label for="inputID" class="col-md-3 control-label">学号/工号</label>
+							<div class="col-md-9">
+								<input class="form-control" name="inputuID" type="text" value="<%=userid %>"
+								onblur="checkUserName(this.value)"
+								 />
 							</div>
 						</div>
 						<div class="form-group">
-							 <label for="inputPassword3" class="col-sm-3 control-label">密码</label>
-							<div class="col-sm-9">
-								<input class="form-control" id="inputPassword3" type="password" />
+							 <label for="inputPassword3" class="col-md-3 control-label">密码</label>
+							<div class="col-md-9">
+								<input class="form-control" name="inputPassword" type="password" value="<%=passwd %>"
+								onblur="checkPassword(this.value)"
+								/>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
+							<div class="col-md-3"></div>
+							<div class="col-md-9">
+								<div id="msg" style="color:red;"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-3"></div>
+							<div class="col-md-9 column">
 								<div class="checkbox">
-									 <label><input type="checkbox" />记住我</label>
+									<div class="col-md-5 column">
+										<label><input type="checkbox" name="checkboxname" value="selected" checked="checked"/>记住我</label>
+									 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</div>
+									<div class="col-md-2 column"></div>
+									<div class="col-md-5 column">
+										<a href="NewFile.jsp" >忘记密码？</a>
+									</div>
 								</div>
 							</div>
-						</div>
+						
 						<div class="form-group">
-							<label for="inputPassword5" class="col-sm-3 control-label"></label>
-							<div class="col-md-3 column">
-							 	<button type="submit" class="btn btn-default" action="">登录</button>
+							<div class="col-md-3 column"></div>
+							<div class="col-md-4 column">
+							 	<button type="submit" class="btn btn-block btn-primary" onclick="">登录</button>
 							</div>
-							<div class="col-md-6 column">
-							 	<button class="btn btn-default" >
-							 		<a href=Register.jsp>忘记密码？</a>
-							 	</button>							
+							<div class="col-md-1 column"></div>
+							<div class="col-md-4 column">
+							 	<button onclick="window.location.href='Register.jsp'" type="button" class="btn btn-block btn-primary">注册 </button>							
 							</div>
 						</div>
 					</form>
@@ -121,5 +161,27 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+function checkUserName(obj){
+    var username = obj;
+	var checkUserNameResult = document.getElementById("msg");  
+    if(username.trim().length==0){
+          checkUserNameResult.innerHTML = "用户名不能为空";  
+          obj.focus();
+    }else{
+    	 checkUserNameResult.innerHTML = "";  
+    }
+}
+function checkPassword(obj) {
+    var password = obj;
+    var checkPasswordResult = document.getElementById("msg");
+    if (password.trim().length == 0) {
+        checkPasswordResult.innerHTML = "密码不能为空";
+        obj.focus();
+    } else {
+        checkPasswordResult.innerHTML = "";
+    }
+}
+</script>
 </body>
 </html>

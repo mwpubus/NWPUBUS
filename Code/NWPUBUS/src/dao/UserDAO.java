@@ -122,7 +122,7 @@ public class UserDAO {
 				
 				String Name = rs.getString("name");
 				
-				String Password = rs.getString("Password");
+				String Password = rs.getString("password");
 				String tel = rs.getString("tel");
 				String utype = rs.getString("utype");
 				user = new User(Name,uid,Password,tel,utype);
@@ -134,6 +134,33 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return user;
+	}
+	/**
+	 * 验证用户名和密码
+	 * @param uid
+	 * @param password
+	 * @return true or false
+	 */
+	public boolean verify(String uid, String password) {
+		try {
+			Connection c = DBHelper.getInstance().getConnection();
+			Statement s = c.createStatement();
+			String sql = "select password from user where u_id = '" + uid + "'";
+			ResultSet rs = s.executeQuery(sql);
+			
+			String passwd = "";
+			if(rs.next()) {
+				passwd = rs.getString("password");
+			}
+			DBHelper.closeConnection(c, s, rs);
+			if(password.equals(passwd)) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
 
