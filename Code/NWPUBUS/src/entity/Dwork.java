@@ -8,6 +8,7 @@ public class Dwork {
 	private String time;
 	private String license;
 	private String delay;
+	private String start;
 	private int remain;
 
 	public Dwork() {
@@ -77,6 +78,14 @@ public class Dwork {
 
 	public void setLine(int line) {
 		this.line = line;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
 	}
 
 	private int line;

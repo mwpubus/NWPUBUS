@@ -2,12 +2,16 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import entity.MOrder;
 import utils.DBHelper;
 
 
 /**
  * OrderDAO 对预约表的数据操作类
- * @author 李云飞
+
  *
  */
 public class MorderDAO {
@@ -16,21 +20,30 @@ public class MorderDAO {
 	 * 增加一条预约
 	 * @param 姓名，学号/工号，用户类型，预约时间
 	 */
-	public void addOrder(String name, String uid, String utype, String otime) {
+	public void addOrder(MOrder order) {
 		try {
 			//建立数据库连接
 			Connection c = DBHelper.getInstance().getConnection();
 			String priority = "low";
-			if(utype.equals("teacher")) {
+			if(order.getUtype().equals("教师")) {
 				priority = "high";
 			}
-			String sql = "insert into morder values (?, ?, ?, ?, ?)";
+			int remain = new DworkDAO().selectRemain(order.getLicense(), order.getDay(), order.getOtime());
+			String status="";
+			if(remain>=40)
+				status="dealing";
+			else
+				status="success";
+			String sql = "insert into morder values (?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setString(1, name);
-			ps.setString(2, uid);
-			ps.setString(3, utype);
-			ps.setString(4, otime);
+			ps.setString(1, order.getLicense());
+			ps.setString(2, order.getUid());
+			ps.setString(3, order.getUtype());
+			ps.setString(4, order.getOtime());
 			ps.setString(5, priority);
+			ps.setString(6, order.getStart());
+			ps.setString(7, order.getDay());
+			ps.setString(8, status);
 			ps.execute();
 			c.close();
 		} catch(Exception e) {
@@ -57,13 +70,15 @@ public class MorderDAO {
 	 * 取消预约
 	 * @param 学号/工号，预约时间
 	 */
-	public void deleteOrder(String uid, String time) {
+	public void deleteOrder(String uid, String license,String time,String day) {
 		try {
 			Connection c = DBHelper.getInstance().getConnection();
-			String sql = "delete from morder where u_id = ? and otime = ?";
+			String sql = "delete from morder where license = ? and u_id = ? and otime = ? and day = ?";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setString(1, uid);
-			ps.setString(2, time);
+			ps.setString(1, license);
+			ps.setString(2, uid);
+			ps.setString(3, time);
+			ps.setString(4, day);
 			ps.execute();
 			c.close();
 		} catch(Exception e) {
@@ -74,18 +89,50 @@ public class MorderDAO {
 	/**
 	 * 预约变更
 	 */
-	public void updateOrder(String uid, String time, String newtime) {
+	public void updateOrder(String uid, String license,String time,String day, String newtime) {
 		try {
 			Connection c = DBHelper.getInstance().getConnection();
-			String sql = "update morder set otime = ? where u_id = ? and otime = ?";
+			String sql = "update morder set otime = ? where license = ? u_id = ? and otime = ? and day = ?";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setString(1,newtime);
-			ps.setString(2, uid);
-			ps.setString(3, time);
+			ps.setString(2, license);
+			ps.setString(3, uid);
+			ps.setString(4, time);
+			ps.setString(5, day);
 			ps.execute();
 			c.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * @param order
+	 * @return
+	 */
+	public boolean ifOrder(MOrder order)
+	{
+		try {
+			Connection c = DBHelper.getInstance().getConnection();
+			String sql = "select * from morder where (license=?) and (u_id=?) and (day=?) and (otime=?)";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setString(1, order.getLicense());
+			ps.setString(2, order.getUid());
+			ps.setString(3, order.getDay());
+			ps.setString(4,order.getOtime());
+			ResultSet rs = ps.executeQuery();
+			
+			if(!rs.next()){
+				c.close();
+				return false;}
+			else {c.close();
+				return true;}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 return true;
+	}
+
 }

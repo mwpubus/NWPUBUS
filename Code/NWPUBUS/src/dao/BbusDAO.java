@@ -58,14 +58,14 @@ public class BbusDAO {
 			}
 	    }
 	  
-	    public void update(Bbus bbus) {
+	    public void update(String dis,String name) {
 	  
-	        String sql = "update bbus set name= ?,dispatch = ? where license = ?";
+	        String sql = "update bbus set dispatch = ? where name = ?";
 	        try (Connection c = db.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
 	  
-	           ps.setString(1, bbus.getName());
-	           ps.setString(2,bbus.getDispatch());
-	           ps.setString(3, bbus.getLicense());
+	          
+	           ps.setString(1,dis);
+	           ps.setString(2,name);
 	           ps.execute();
 	           DBHelper.closeConnection(c, ps, null);
 	  
@@ -137,6 +137,24 @@ public class BbusDAO {
 				}
 				c.close();
 				return license;
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "error";
+		}
+		public String getDispatch(String name) {
+			try {
+				Connection c = DBHelper.getInstance().getConnection();
+				String sql = "select dispatch from bbus where name = ?";
+				PreparedStatement ps = c.prepareStatement(sql);
+				ps.setString(1, name);
+				ResultSet rs = ps.executeQuery();
+				String dispatch = null;
+				if(rs.next()) {
+					dispatch = rs.getString("dispatch");
+				}
+				c.close();
+				return dispatch;
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

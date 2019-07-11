@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String id = request.getParameter("inputuID");
 		String password = request.getParameter("inputPassword");
-		session.setAttribute("id", id);//这里改了
+		session.setAttribute("id", id);//设置idsession
 		boolean f = ud.verify(id, password);
 		if(f) {
 			user = ud.get(id);
@@ -62,19 +62,34 @@ public class LoginServlet extends HttpServlet {
 			}
 			
 			String utype = user.getUtype();
-			if(utype.equals("student")) {
+			if(utype.equals("学生")) {
+				System.out.println(utype);
+				request.getRequestDispatcher("Student.jsp").forward(request,response);
+			} else if(utype.equals("教师")) {
+				
+				System.out.println(utype);
 				request.getRequestDispatcher("Teacher.jsp").forward(request,response);
-			} else if(utype.equals("teacher")) {
-				request.getRequestDispatcher("Teacher.jsp").forward(request,response);
-			} else if(utype.equals("volunteer")) {
-				request.getRequestDispatcher("Teacher.jsp").forward(request,response);
-			} else {
-				request.getRequestDispatcher("Teacher.jsp").forward(request,response);
+			} else if(utype.equals("司机")) {
+				System.out.println(utype);
+				request.getRequestDispatcher("Driver.jsp").forward(request,response);
+			} else if(utype.equals("管理员")) {
+				System.out.println(utype);
+				request.getRequestDispatcher("Admin.jsp").forward(request,response);
+			}else{
+				System.out.println(utype);
+				request.getRequestDispatcher("DDY.jsp").forward(request,response);
 			}
 				
 		} else {
 			PrintWriter out = response.getWriter();
-			out.print("<script>alert('密码错误！');window.location.href='Login.jsp'</script>");
+			out.print("<html><head><meta charset=\"ISO-8859-1\"><title>登陆消息</title>"
+           +"<link href=\"https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css\" rel=\"stylesheet\">"
+           +"<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>"
+           +"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js\"></script>"
+           +"</head><body><script type=\"text/javascript\">"
+           +"swal('登陆消息', '密码错误', 'error');$('button:contains(\"OK\")').click(function () {window.location.href='Login.jsp'})"
+           +"</script></body></html>");
+
 //			response.sendRedirect("Login.jsp");
 		}
 	}

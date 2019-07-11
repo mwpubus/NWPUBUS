@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class DBHelper {
 
-	public String url = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8";
+	public String url = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&&useSSL=false";
 	public String username = "root";
 	public String password = null;
 	public static DBHelper instance = null;

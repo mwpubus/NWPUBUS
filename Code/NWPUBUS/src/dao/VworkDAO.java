@@ -129,4 +129,24 @@ public class VworkDAO {
 		return vwork;
 	}
 
+	public void delete(String uid,String time, String place) {
+		try {
+
+			Connection c = DBHelper.getInstance().getConnection();
+
+			String sql = "delete from vwork where u_id = ? and time = ? and place = ?" ;
+
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setString(1, uid);
+			ps.setString(2, time);
+			ps.setString(3, place);
+
+			ps.execute();
+
+			DBHelper.closeConnection(c, ps, null);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -136,6 +136,35 @@ public class UserDAO {
 		return user;
 	}
 	/**
+	 * @param uid
+	 * @return
+	 */
+	public String getUID(String name) {
+		String uid = null;
+		try {
+
+			Connection c = DBHelper.getInstance().getConnection();
+
+			Statement s = c.createStatement();
+
+			String sql = "select u_id from user where name = '" + name+"'";
+
+			ResultSet rs = s.executeQuery(sql);
+
+			if (rs.next()) {
+				
+				 uid = rs.getString("u_id");
+				
+			}
+
+			DBHelper.closeConnection(c, s, rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return uid;
+	}
+	/**
 	 * 验证用户名和密码
 	 * @param uid
 	 * @param password

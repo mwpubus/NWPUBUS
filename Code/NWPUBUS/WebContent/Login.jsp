@@ -129,7 +129,7 @@
 									</div>
 									<div class="col-md-2 column"></div>
 									<div class="col-md-5 column">
-										<a href="NewFile.jsp" >忘记密码？</a>
+										<a href="ChangePasswd2.jsp" >忘记密码？</a>
 									</div>
 								</div>
 							</div>

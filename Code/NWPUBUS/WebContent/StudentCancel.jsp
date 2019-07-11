@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+     <%@ page import="utils.*"%>
+ <%@page import="java.sql.ResultSet"%>
+ <%@page import="java.sql.DriverManager"%>
+ <%@page import="java.sql.Connection"%>
+ <%@page import="java.sql.Statement"%>
+ <%@page import="java.sql.PreparedStatement"%>
+ <%@page import="java.util.Date" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,12 +50,12 @@ function checkTime(i){
 							 <a href="StudentCancel.jsp">已预约</a>
 						</li>
 						<li>
-							 <a href="#">用户反馈</a>
+							 <a href="UserFeedback1.jsp">用户反馈</a>
 						</li>
 					</ul>					
 				</div>
 				<div class="col-md-3 column">
-				<P>欢迎&nbsp&nbsp<a>LYF</a>&nbsp&nbsp&nbsp&nbsp<a>退出登陆<a></P>
+				<P>欢迎&nbsp&nbsp<a><%=request.getSession().getAttribute("id")%></a><a href="Login.jsp">退出登陆<a></P>
 				
 				</div>
 				<div class="col-md-4 column">
@@ -60,6 +67,17 @@ function checkTime(i){
 				
 			</div>
 		</div>
+		<% 
+				DBHelper db =DBHelper.getInstance();
+				Connection c = db.getConnection();
+				String sql = "select license,day,otime,start,status from morder where u_id = ?";
+				PreparedStatement ps = c.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+				String uid = (String)request.getSession().getAttribute("id");
+				ps.setString(1, uid);
+				
+				ResultSet rs = ps.executeQuery();
+				
+				%>
 		
 		<!-- 这是一个列表 -->
 		<div class="container">
@@ -67,63 +85,138 @@ function checkTime(i){
 				<div class="col-md-12 column">
 					<table class="table table-hover table-striped">
 						<thead>
-								<tr>
+							<tr>
+								
+								
+								                        <th>
+														校车序号
+														</th>
+														<th>
+														发车日期
+														</th>
 														<th>
 														发车时间
 														</th>
 														<th>
-														已预约人数
+														发车地点
 														</th>
 														<th>
-														状态（能否乘坐？）
+														状态
 														</th>
 														<th>
 														操作
 														</th>
 													</tr>
 												</thead>
-												<c:forEach items="" var="npubus" varStatus="nb">
-													<tbody>
-													<tr class="success">
-														<td>
-														data
+												
+													<tbody id = "orderlist">
+														<tr class="success">
+													    <td>
+														id
 														</td>
 														<td>
-														number
+														date
 														</td>
 														<td>
-														Approved
+														time
 														</td>
-								<td>
+														<td>
+														start
+														</td>
+														<td>
+														Status
+														</td>
+														<td>
+														Operate
+														</td>
+	
+	
+						</tr>
+						<%String status = "";
+							
+         					 while (rs.next()) {
+         					
+       													 %>
+        											 <tr >
+          												 <td><%=rs.getString(1)%></td>
+          												 <td><%=rs.getString(2)%></td>
+            											 <td><%=rs.getString(3)%></td>
+            											 <td><%=rs.getString(4)%></td>
+            											 <td><%=rs.getString(5)%></td>
+            											 
+            											 <td>
 						<!-- 这是一个模态框 ，用来确认操作 -->
-							<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">取消预约</button><!-- 模态框（Modal） --> 								
+							<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">取消预约</button><!-- 模态框（Modal） -->   								
    						<script>
   			 			$(function () { $('#myModal').modal2('hide')});</script>					
   							</td>
-						</tr>
-					</tbody>
-					</c:forEach>
+  							 </tr>
+         													<%
+           														  }
+         													%>
+													</tbody>
+
+						
+				
+					
 				</table>
-				<!-- 模态框 -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  									 <div class="modal-dialog">
-      									<div class="modal-content">
-         									<div class="modal-header">
-            									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×            </button>
-            										<h4 class="modal-title" id="myModalLabel">操作确认 </h4>
-        			 						</div>
-         									<div class="modal-body"> 请确认您要取消预约的校车信息：<br>发车时间：<br>已预约人数：        </div>
-         									<div class="modal-footer">
-            									<button type="button" class="btn btn-default" data-dismiss="modal" >关闭 </button>
-            									<button type="button" class="btn btn-primary" > 确认</button>
-        				 					</div>
-     									</div><!-- /.modal-content -->
-   									</div>
+					<!-- 模态框 -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  									 <div class="modal-dialog">
+		      									<div class="modal-content">
+		         									<div class="modal-header">
+		            									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×            </button>
+		            										<h4 class="modal-title" id="myModalLabel">操作确认 </h4>
+		        			 						</div>
+		         									
+		         									<div >
+										<form class="form-horizontal" method="POST"
+											action="CancelServlet">
+											<div class="modal-body">
+												<p>
+													发车日期：<input type="" id="lday" name="lday" placeholder=""
+														class="text1" readonly="true"></input>
+												</p>
+
+												<p>
+													校车序号：<input type="" class="text1" id="license"
+														name="license" placeholder="" class="text1"
+														readonly="true"></input>
+												</p>
+												<p>
+													发车时间：<input type="" class="text1" id="ltime" name="ltime"
+														placeholder="" class="text1" readonly="true"></input>
+												</p>
+											
+												<p>
+													出发地点：<input type="text"
+														id="lplace" name="lplace" class="text1" readonly="true"
+														value="长安校区--友谊校区"></input>
+												</p>
+
+
+
+
+											</div>
+
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">
+													关闭
+													</button>
+													<button type="submit" class="btn btn-primary" onclick="">
+														确认
+														</button>
+											</div>
+										</form>
+									</div>
+		     									</div><!-- /.modal-content -->
+		   									</div>
    						
 			<!-- 这是一个提示信息 -->
 				<div class="alert alert-success alert-dismissable">
 				 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-				 		<strong>提示!<br></strong> 如果取消预约可能会导致无法坐到此次校车，需重新预约排队。 <a href="TeacherCancel.jsp" class="alert-link">返回</a>
+				 		<strong>提示!<br></strong> 如果取消预约可能会导致无法坐到此次校车，需重新预约排队。 <a href="StudentCancel.jsp" class="alert-link">返回</a>
 				</div>
 				<!-- /.modal-dialog --></div><!-- /.modal -->
 			</div>
@@ -131,5 +224,44 @@ function checkTime(i){
 	</div>
 </div>
 </div>
+
+<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.nouislider.js"></script>
+	<script src="toastr/toastr.js"></script>
+	<script type="text/javascript">
+	
+
+		$(function() {
+			var license,ltime,lday,lplace;
+			$("#orderlist").on(
+					"click",
+					"button",
+					function(event) {
+						license  = $(this).parent().parent().find("td").eq(0)
+						           .text();
+						ltime = $(this).parent().parent().find("td").eq(2)
+							    .text();
+						lday = $(this).parent().parent().find("td").eq(
+								1).text();
+						lplace = $(this).parent().parent().find("td").eq(
+								3).text();
+						console.log(license);
+						console.log(ltime);
+						console.log(lday);
+						console.log(lplace);
+						
+					});
+
+			$("#myModal").on('show.bs.modal', function() {
+				$(this).find("#license").val(license);
+				$(this).find("#ltime").val(ltime);
+				$(this).find("#lday").val(lday);
+				$(this).find("#lplace").val(lplace);
+			})
+			
+		})
+
+	</script>
 </body>
 </html>

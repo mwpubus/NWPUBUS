@@ -97,7 +97,7 @@
 						<div class="form-group">
 							 <label for="inputVertify" class="col-md-3 control-label">验证码</label>
 							<div class="col-md-9">
-								<input class="form-control" id="inputVertify" type="text" />
+								<input class="form-control" id="inputVertify" type="text" name ="vertify"/>
 							</div>
 						</div>
 						<div class="form-group">
