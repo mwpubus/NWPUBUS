@@ -66,6 +66,15 @@ function checkTime(i){
   display: block;
   z-index:9999
 }
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
 </style>
 </head>
 <body>
@@ -149,7 +158,7 @@ function checkTime(i){
 				if(rs.next()) {
 					kongxian = rs.getInt(1);
 				}
-				sql = "select distinct time from tbus where start = '友谊' and delay = '正常工作' and day = ? order by time";
+				sql = "select distinct time from tbus where start = '友谊' and (delay = '正常工作'or delay ='审核中'or delay = '替班')  and day = ? order by time";
 				ps = c.prepareStatement(sql);
 				ps.setString(1, xingqi);
 				rs = ps.executeQuery();

@@ -35,9 +35,76 @@ function checkTime(i){
 	return i;
 }
 </script>
+<style>
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
+
+.marquee {
+            width: 450px;
+            margin: 0 auto;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: marquee 50s linear infinite;
+        }
+.marquee:hover {
+            animation-play-state: paused
+        }
+
+        /* Make it move */
+        @keyframes marquee {
+            0%   { text-indent: 27.5em }
+            100% { text-indent: -105em }
+        }
+
+        /* Make it pretty */
+.microsoft {
+            padding-left: 1.5em;
+            position: relative;
+            font: 16px 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+        }
+
+        /* ::before was :before before ::before was ::before - kthx */
+.microsoft:before, .microsoft::before {
+            z-index: 2;
+            content: '';
+            position: absolute;
+            top: -1em; left: -1em;
+            width: .5em; height: .5em;
+            box-shadow: 1.0em 1.25em 0 #F65314,
+                        1.6em 1.25em 0 #7CBB00,
+                        1.0em 1.85em 0 #00A1F1,
+                        1.6em 1.85em 0 #FFBB00;
+        }
+
+.microsoft:after, .microsoft::after {
+            z-index: 1;
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 2em; height: 2em;
+            background-image: linear-gradient(90deg, white 70%, rgba(255,255,255,0));
+        } 
+</style>
 </head>
 <body>
-
+<% 
+				DBHelper db20 =DBHelper.getInstance();
+				Connection c20 = db20.getConnection();
+				String sql20 = "select title,content,time from notice ";
+				
+				PreparedStatement ps20 = c20.prepareStatement(sql20,Statement.RETURN_GENERATED_KEYS);
+		
+				ResultSet  rs20 = ps20.executeQuery();
+				if(rs20.next())
+				%>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
@@ -70,6 +137,14 @@ function checkTime(i){
 				
 			</div>
 		</div>
+				
+				<!-- 这是一个文字滚动公告，通知一些维护信息以及车辆信息  -->
+						<br>
+				<p class="marquee">
+
+				<a href="Announcement.jsp"><%=rs20.getString(2) %></a>,.
+				 </p>
+				<br>
 		<% 
 				DBHelper db =DBHelper.getInstance();
 				Connection c = db.getConnection();

@@ -154,7 +154,6 @@ p{
 	color: #140B0B;
 	font-size: 18px;
 	font-weight: bold;
-	text-transform: uppercase;
 	text-align: center;
 	letter-spacing: 0pt;
 	word-spacing: 0pt;
@@ -180,7 +179,7 @@ p{
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="row clearfix">
-				<div class="col-md-8 column">
+				<div class="col-md-5 column">
 					<ul class="breadcrumb">
 						<li>
 							 <a href="Teacher.jsp">预约</a>

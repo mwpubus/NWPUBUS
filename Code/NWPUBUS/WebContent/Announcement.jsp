@@ -57,16 +57,27 @@
 }
 .textarea
 {
+	background:rgba(0,0,0,0);
 	border-background: white;
 	border: none;
 }
 .text1
 {
+	background:rgba(0,0,0,0);
 	border-background: white;
 	border: none;
 }
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
 </style>
-<body>
+<body background="images/tsg2.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment: fixed;">
 <% 
 				DBHelper db =DBHelper.getInstance();
 				Connection c = db.getConnection();
@@ -90,7 +101,7 @@
 						标题：<input  type="text" id="ltime" readonly="true" value="<%=rs.getString(1) %>" class="text1"></input>
 					</h3>
 					<h3>时间：<input  type="text" id="ltime" readonly="true" value="<%=rs.getString(3) %>" class="text1"></input></p></h3>
-					<textarea  class="textarea lead" rows="8" cols="100" name="uCode"><%=rs.getString(2) %></textarea>
+					<textarea  class="textarea lead" rows="8" cols="60" name="uCode"><%=rs.getString(2) %></textarea>
 					</p>
 					
 					<div class="row clearfix">

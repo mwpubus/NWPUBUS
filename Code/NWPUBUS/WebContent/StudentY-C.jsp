@@ -148,12 +148,11 @@ body { margin: 0; font: 13px/1.5 "Microsoft YaHei", "Helvetica Neue", "Sans-Seri
 		.my-map .icon-flg-yellow { background-position: -65px -105px; }
 		.amap-container{height: 100%;}
 
-.p1{
+.p{
 	font-family: georgia, serif;
 	color: #140B0B;
 	font-size: 18px;
 	font-weight: bold;
-	text-transform: uppercase;
 	text-align: center;
 	letter-spacing: 0pt;
 	word-spacing: 0pt;
@@ -177,7 +176,7 @@ body { margin: 0; font: 13px/1.5 "Microsoft YaHei", "Helvetica Neue", "Sans-Seri
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="row clearfix">
-				<div class="col-md-8 column">
+				<div class="col-md-5 column">
 					<ul class="breadcrumb">
 						<li>
 							<a href="StudentY-C.jsp">预约</a>

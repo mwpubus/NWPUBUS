@@ -3,6 +3,7 @@
     <%@page import="utils.*" %>
     <%@page import="java.util.Date" %>
     <%@page import="java.sql.ResultSet"%>
+     <%@page import="java.sql.Statement"%>
     <%@page import="java.sql.Connection"%>
     <%@page import="java.sql.PreparedStatement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,9 +67,19 @@ function checkTime(i){
   display: block;
   z-index:9999
 }
+
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
 </style>
 </head>
-<body>
+<body>				
 <!-- 这是一个导航栏 -->
 <div class="container">
 	<div class="row clearfix">
@@ -110,7 +121,7 @@ function checkTime(i){
 				</div>
 			</div>
 		</div>
-		
+				
 		<div class="col-md-2 column">
 		<br><br>
 					<ul class="nav nav-stacked nav-pills">
@@ -149,9 +160,9 @@ function checkTime(i){
 				if(rs.next()) {
 					kongxian = rs.getInt(1);
 				}
-				sql = "select distinct time from tbus where start = '长安' and delay = '正常工作' and day = ? order by time";
+				sql = "select distinct time from tbus where start = '长安' and (delay = '正常工作'or delay ='审核中' or delay = '加班'or delay = '替班') order by time";
 				ps = c.prepareStatement(sql);
-				ps.setString(1, xingqi);
+			
 				rs = ps.executeQuery();
 				%>
 											<table class="table table-hover table-striped">

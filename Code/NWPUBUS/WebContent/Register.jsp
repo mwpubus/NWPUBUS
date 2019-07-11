@@ -17,7 +17,6 @@
 					<img src="photos/aheadFix.png" class="img-responsive" alt="Cinque Terre" width="1000" height="200"/>
 				</div>
 				<div class="col-md-2 column">
-					 <button type="button" class="btn btn-primary">中文/English</button>
 				</div>
 			</div>
 		</div>

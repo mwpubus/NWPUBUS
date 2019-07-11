@@ -66,6 +66,15 @@ function checkTime(i){
   display: block;
   z-index:9999
 }
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
 </style>
 </head>
 <body>
@@ -126,10 +135,10 @@ function checkTime(i){
 						<li class="disabled">
 							 <a href="#">预约状态</a>
 						</li>
-						<li class="active">
+						<li>
 							 <a href="AdminCarEditC-Y.jsp">长安--友谊校区</a>
 						</li>
-						<li>
+						<li class="active">
 							 <a href="AdminCarEditY-C.jsp">友谊--长安校区</a>
 						</li>
 					</ul>
@@ -140,8 +149,8 @@ function checkTime(i){
 				DBHelper db = DBHelper.getInstance();
 				Connection c = db.getConnection();
 				Date date = new Date();
-				String xingqi ="星期"+"日一二三四五六日一二三四五六".charAt(date.getDay());
-				String sql = "select count(*) from tbus where start = '友谊' and delay = '空闲' and day = ?";
+				String xingqi ="星期"+"日一二三四五六日一二三四五六".charAt(date.getDay()+1);
+				String sql = "select count(*) from tobus where start = '友谊' and delay = '空闲' and day = ?";
 				PreparedStatement ps = c.prepareStatement(sql);
 				ps.setString(1, xingqi);
 				ResultSet rs = ps.executeQuery();
@@ -149,7 +158,7 @@ function checkTime(i){
 				if(rs.next()) {
 					kongxian = rs.getInt(1);
 				}
-				sql = "select * from tbus where start = '友谊' and delay = '正常工作' and day = ? order by time";
+				sql = "select distinct time from tobus where start = '友谊' and (delay = '正常工作'or delay ='审核中' or delay = '加班'or delay = '替班')  and day = ? order by time";
 				ps = c.prepareStatement(sql);
 				ps.setString(1, xingqi);
 				rs = ps.executeQuery();
@@ -179,7 +188,7 @@ function checkTime(i){
 									<%
 													while(rs.next()) {
 														String time = rs.getString("time");
-														String sql2 = "select remain from tbus where time = ? and day = ? and start = '友谊'";
+														String sql2 = "select remain from tobus where time = ? and day = ? and start = '友谊'";
 														PreparedStatement ps2 = c.prepareStatement(sql2);
 														ps2.setString(1, time);
 														ps2.setString(2, xingqi);

@@ -68,6 +68,15 @@ function checkTime(i){
   display: block;
   z-index:9999
 }
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
 </style>
 </head>
 <body>
@@ -88,7 +97,13 @@ function checkTime(i){
 							 <a href="AdminDriver.jsp">司机信息</a>
 						</li>
 						<li>
-							 <a href="AdminFeedback.jsp">用户反馈处理</a>
+							<div class="dropdown">
+							  <a>其他</a>
+							  <div class="dropdown-content">
+							    <a href="AdminFeedback.jsp">用户反馈处理</a><br>
+							    <a href="AdminGG.jsp">发布公告</a>
+							  </div>
+							</div>
 						</li>
 					</ul>
 				</div>

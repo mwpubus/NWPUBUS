@@ -53,6 +53,33 @@ function checkTime(i){
     margin: 4px 2px;
     cursor: pointer;
 }
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index:9999
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index:9999
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index:9999
+}
 </style>
 </head>
 <body>
@@ -73,7 +100,13 @@ function checkTime(i){
 							 <a href="AdminDriver.jsp">司机信息</a>
 						</li>
 						<li>
-							 <a href="AdminFeedback.jsp">用户反馈处理</a>
+							 <div class="dropdown">
+							  <a>其他</a>
+							  <div class="dropdown-content">
+							    <a href="AdminFeedback.jsp">用户反馈处理</a><br>
+							    <a href="AdminGG.jsp">发布公告</a>
+							  </div>
+							</div>
 						</li>
 					</ul>
 				</div>

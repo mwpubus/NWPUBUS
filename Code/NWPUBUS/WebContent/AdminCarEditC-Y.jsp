@@ -66,6 +66,15 @@ function checkTime(i){
   display: block;
   z-index:9999
 }
+p{
+	font-family: georgia, serif;
+	color: #140B0B;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 0pt;
+	word-spacing: 0pt;
+}
 </style>
 </head>
 <body>
@@ -126,10 +135,10 @@ function checkTime(i){
 						<li class="disabled">
 							 <a href="#">预约状态</a>
 						</li>
-						<li>
+						<li class="active">
 							 <a href="AdminCarEditC-Y.jsp">长安--友谊校区</a>
 						</li>
-						<li class="active">
+						<li>
 							 <a href="AdminCarEditY-C.jsp">友谊--长安校区</a>
 						</li>
 					</ul>
@@ -140,7 +149,7 @@ function checkTime(i){
 				DBHelper db = DBHelper.getInstance();
 				Connection c = db.getConnection();
 				Date date = new Date();
-				String xingqi ="星期"+"日一二三四五六日一二三四五六".charAt(date.getDay());
+				String xingqi ="星期"+"日一二三四五六日一二三四五六".charAt(date.getDay()+1);
 				String sql = "select count(*) from tobus where start = '长安' and delay = '空闲'";
 				PreparedStatement ps = c.prepareStatement(sql);
 				
@@ -149,7 +158,7 @@ function checkTime(i){
 				if(rs.next()) {
 					kongxian = rs.getInt(1);
 				}
-				sql = "select distinct time from tobus where start = '长安' and delay = '正常工作' order by time";
+				sql = "select distinct time from tobus where start = '长安' and (delay = '正常工作'or delay ='审核中' or delay = '加班'or delay = '替班') order by time";
 				ps = c.prepareStatement(sql);
 				
 				rs = ps.executeQuery();
