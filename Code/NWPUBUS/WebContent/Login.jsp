@@ -87,6 +87,7 @@
 					<img src="photos/aheadFix.png" class="img-responsive" alt="Cinque Terre" width="1000" height="200"/>
 				</div>
 				<div class="col-md-2 column">
+					 <button type="button" class="btn btn-primary btn-block">中文/English</button>
 				</div>
 			</div>
 		</div>
@@ -227,9 +228,6 @@
 	</div>
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-		
-		<div class="col-md-11 column">
-		<br><br><br>
 			<p>
 				<strong>西北工业大学, Inc.</strong>
 				<br>友谊西路<br>
@@ -237,7 +235,6 @@
   				<a href="mailto:#">NorthWesternPolytechnicnicalUniversity@npu.edu.com</a></address>
 			</p>
 			<p class="text-muted">Copyright © 2018 Northwestern Polytechnical University All Rights Reserved</p>
-		</div>
 		</div>
 	</div>
 </div>

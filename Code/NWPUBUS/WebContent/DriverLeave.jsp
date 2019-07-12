@@ -7,17 +7,6 @@
    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
    <script src="//cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<style>
-p{
-	font-family: georgia, serif;
-	color: #140B0B;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	letter-spacing: 0pt;
-	word-spacing: 0pt;
-}
-</style>
 </head>
 <body>
 <!-- 这是一个导航栏 -->

@@ -16,102 +16,19 @@
    <script src="//cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style>
-
-.marquee {
-            width: 450px;
-            margin: 0 auto;
-            overflow: hidden;
-            white-space: nowrap;
-            box-sizing: border-box;
-            animation: marquee 50s linear infinite;
-        }
-.marquee:hover {
-            animation-play-state: paused
-        }
-
-        /* Make it move */
-        @keyframes marquee {
-            0%   { text-indent: 27.5em }
-            100% { text-indent: -105em }
-        }
-
-        /* Make it pretty */
-.microsoft {
-            padding-left: 1.5em;
-            position: relative;
-            font: 16px 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
-        }
-
-        /* ::before was :before before ::before was ::before - kthx */
-.microsoft:before, .microsoft::before {
-            z-index: 2;
-            content: '';
-            position: absolute;
-            top: -1em; left: -1em;
-            width: .5em; height: .5em;
-            box-shadow: 1.0em 1.25em 0 #F65314,
-                        1.6em 1.25em 0 #7CBB00,
-                        1.0em 1.85em 0 #00A1F1,
-                        1.6em 1.85em 0 #FFBB00;
-        }
-
-.microsoft:after, .microsoft::after {
-            z-index: 1;
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 2em; height: 2em;
-            background-image: linear-gradient(90deg, white 70%, rgba(255,255,255,0));
-        } 
-        
-.buttonXK{
+.buttonYJ {
 	border-radius: 25px;
-    background-color: #4CAF50; /* Green */
+    background-color: blue;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 10px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
     cursor: pointer;
 }
-
-.buttonXK1 {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #4CAF50;
-}
-
-.buttonXK1:hover {
-    background-color: #4CAF50;
-    color: white;
-}
-.buttonXK2 {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #008CBA;
-}
-
-.buttonXK2:hover {
-    background-color: #008CBA;
-    color: white;
-}
-
-		
-p{
-	font-family: georgia, serif;
-	color: #140B0B;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	letter-spacing: 0pt;
-	word-spacing: 0pt;
-}
-
 .text1
 {
 	border-background: white;

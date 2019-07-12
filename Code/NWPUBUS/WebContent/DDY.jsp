@@ -118,17 +118,6 @@
     background-color: #008CBA;
     color: white;
 }
-
-		
-p{
-	font-family: georgia, serif;
-	color: #140B0B;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	letter-spacing: 0pt;
-	word-spacing: 0pt;
-}
 </style>
 </head>
 <body>
@@ -186,8 +175,8 @@ p{
 						<div class="row clearfix">
 							<div class="col-md-4 column">
 								<div class="btn-group">
-									<a href="DDY.jsp" class="buttonXK buttonXK2">长安--友谊</a>
-									<a href="DDY2.jsp" class="buttonXK buttonXK2">友谊--长安</a>
+									<a href="DDY.jsp" class="buttonYJ">长安--友谊</a>
+									<a href="DDY2.jsp" class="buttonYJ">友谊--长安</a>
 								</div>
 							</div>
 							<div class="col-md-4 column">

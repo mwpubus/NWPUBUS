@@ -146,17 +146,16 @@ body { margin: 0; font: 13px/1.5 "Microsoft YaHei", "Helvetica Neue", "Sans-Seri
 		.my-map .icon-flg-yellow { background-position: -65px -105px; }
 		.amap-container{height: 100%;}
 
-		
-p{
+.p1{
 	font-family: georgia, serif;
 	color: #140B0B;
 	font-size: 18px;
 	font-weight: bold;
+	text-transform: uppercase;
 	text-align: center;
 	letter-spacing: 0pt;
 	word-spacing: 0pt;
 }
-
 </style>
 </head>
 
@@ -176,7 +175,7 @@ p{
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="row clearfix">
-				<div class="col-md-5 column">
+				<div class="col-md-8 column">
 					<ul class="breadcrumb">
 						<li>
 							 <a href="TeacherY-C.jsp">预约</a>
@@ -195,7 +194,7 @@ p{
 					
 				</div>
 								<div class="col-md-3 column">
-				<p>欢迎&nbsp&nbsp<a><%=request.getSession().getAttribute("id")%></a>&nbsp&nbsp&nbsp&nbsp<a href="Login.jsp">退出登陆<a></p>
+				<P>欢迎&nbsp&nbsp<a><%=request.getSession().getAttribute("id")%></a>&nbsp&nbsp&nbsp&nbsp<a href="Login.jsp">退出登陆<a></P>
 				
 				</div>
 				<div class="col-md-4 column">
@@ -1239,7 +1238,7 @@ p{
 </div>
 </div>
 </div>
-	<p>“友谊校区--长安校区”校车乘坐点（黄旗标记）</p>
+<p class="p1">“友谊校区--长安校区”校车乘坐点（黄旗标记）</p>
   <div id="wrap" class="my-map">
 		<div id="mapContainer"></div>
 	</div>

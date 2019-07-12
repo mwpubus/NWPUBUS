@@ -68,15 +68,6 @@ function checkTime(i){
 	border-background: white;
 	border: none;
 }
-p{
-	font-family: georgia, serif;
-	color: #140B0B;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	letter-spacing: 0pt;
-	word-spacing: 0pt;
-}
 </style>
 </head>
 <body>

@@ -113,17 +113,4 @@ public class NoticeDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public void EmptyFeedBack() {
-		try {
-			Connection c = DBHelper.getInstance().getConnection();
-			String sql = "delete from notice";
-			PreparedStatement ps = c.prepareStatement(sql);
-			ps.execute();
-			c.close();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 }

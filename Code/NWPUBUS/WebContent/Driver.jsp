@@ -104,16 +104,6 @@ function checkTime(i){
             width: 2em; height: 2em;
             background-image: linear-gradient(90deg, white 70%, rgba(255,255,255,0));
         } 
-        
-p{
-	font-family: georgia, serif;
-	color: #140B0B;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	letter-spacing: 0pt;
-	word-spacing: 0pt;
-}
 </style>
 </head>
 <body>

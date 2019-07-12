@@ -123,15 +123,6 @@ function checkTime(i){
   display: block;
   z-index:9999
 }
-p{
-	font-family: georgia, serif;
-	color: #140B0B;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	letter-spacing: 0pt;
-	word-spacing: 0pt;
-}
 </style>
 </head>
 <body>
